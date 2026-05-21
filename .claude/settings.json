@@ -1,0 +1,12 @@
+{
+  "plugins": {
+    "humand-react@hu-ai-agent-plugin": true,
+    "humand-frontend-sandbox@hu-ai-agent-plugin": true
+  },
+  "permissions": {
+    "allow": [
+      "Skill(humand-frontend-sandbox:check-project)",
+      "Skill(humand-frontend-sandbox:remediate-project)"
+    ]
+  }
+}
