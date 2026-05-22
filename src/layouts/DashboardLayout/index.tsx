@@ -18,9 +18,7 @@ const SECTIONS: NavSectionProps[] = [
   {
     key: 'main',
     title: 'Main',
-    items: [
-      { key: 'home', title: 'Home', path: '/', icon: <IconHome /> },
-    ],
+    items: [{ key: 'home', title: 'Home', path: '/', icon: <IconHome /> }],
   },
 ];
 

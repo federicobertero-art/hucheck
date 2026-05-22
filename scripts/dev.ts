@@ -31,21 +31,12 @@ async function main() {
     process.exit(1)
   }
 
-  if (hasApiRoutes()) {
-    console.log(`\n▶  Starting vercel dev on port ${PORT}...\n`)
-    const child = spawn('npx', ['vercel', 'dev', '--listen', String(PORT)], {
-      stdio: 'inherit',
-      env: { ...process.env },
-    })
-    child.on('exit', code => process.exit(code ?? 0))
-  } else {
-    console.log(`\n▶  Starting vite on port ${PORT}...\n`)
-    const child = spawn('npx', ['vite', '--port', String(PORT), '--strictPort'], {
-      stdio: 'inherit',
-      env: { ...process.env },
-    })
-    child.on('exit', code => process.exit(code ?? 0))
-  }
+  console.log(`\n▶  Starting vite on port ${PORT}...\n`)
+  const child = spawn('npx', ['vite', '--port', String(PORT), '--strictPort'], {
+    stdio: 'inherit',
+    env: { ...process.env },
+  })
+  child.on('exit', code => process.exit(code ?? 0))
 }
 
 main()

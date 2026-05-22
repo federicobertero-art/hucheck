@@ -4,7 +4,11 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    include: ['@emotion/react', '@emotion/styled', '@emotion/cache'],
+  },
   resolve: {
+    dedupe: ['react', 'react-dom', '@emotion/react', '@emotion/styled', '@mui/material'],
     alias: {
       '@material-hu/mui/lab': getNodeModule('@mui/lab'),
       '@material-hu/mui/x-date-pickers': getNodeModule('@mui/x-date-pickers'),
