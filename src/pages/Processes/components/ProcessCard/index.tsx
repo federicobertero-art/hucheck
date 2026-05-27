@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import Stack from '@material-hu/mui/Stack';
 import Typography from '@material-hu/mui/Typography';
 
@@ -8,14 +10,15 @@ import ProgressBar from '@material-hu/components/design-system/ProgressIndicator
 import { STATUS_CONFIG } from '../../constants';
 import { type DailyProcess } from '../../types';
 
-type Props = { process: DailyProcess; onClick: () => void };
+type Props = { process: DailyProcess };
 
-const ProcessCard = ({ process, onClick }: Props) => {
+const ProcessCard = ({ process }: Props) => {
+  const navigate = useNavigate();
   const { label, type } = STATUS_CONFIG[process.status];
   return (
     <CardContainer
       fullWidth
-      onClick={onClick}
+      onClick={() => navigate(`/procesos/${process.id}`)}
       padding={16}
       hasShadow
     >

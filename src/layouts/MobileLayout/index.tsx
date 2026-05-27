@@ -39,7 +39,7 @@ export const MobileLayout = () => {
     <Stack
       sx={{ minHeight: '100vh', bgcolor: 'new.background.elements.default' }}
     >
-      <Stack sx={{ position: 'sticky', top: 0, zIndex: 100 }}>
+      <Stack sx={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100 }}>
         <HomeHeader
           onOpenMenu={() => undefined}
           logoSrc={humandLogo}
@@ -53,7 +53,7 @@ export const MobileLayout = () => {
         />
       </Stack>
 
-      <Stack sx={{ flex: 1, pb: '64px' }}>
+      <Stack sx={{ flex: 1, pt: '73px', pb: '64px' }}>
         <Outlet />
       </Stack>
 

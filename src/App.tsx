@@ -13,6 +13,7 @@ import AuditsPage from './pages/Audits';
 import { HomePage } from './pages/Home';
 import NoticesPage from './pages/Notices';
 import ProcessesPage from './pages/Processes';
+import ProcessDetail from './pages/Processes/Detail';
 import './i18n';
 
 const theme = createHuGoTheme();
@@ -35,6 +36,10 @@ const App = () => {
                     <Route
                       path="/procesos"
                       element={<ProcessesPage />}
+                    />
+                    <Route
+                      path="/procesos/:id"
+                      element={<ProcessDetail />}
                     />
                     <Route
                       path="/avisos"

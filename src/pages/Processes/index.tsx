@@ -33,7 +33,6 @@ const ProcessesPage = () => (
           <ProcessCard
             key={process.id}
             process={process}
-            onClick={() => undefined}
           />
         ))}
       </Stack>
