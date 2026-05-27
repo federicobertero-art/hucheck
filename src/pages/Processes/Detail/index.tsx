@@ -18,7 +18,9 @@ const ProcessDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const process = MOCK_PROCESSES.find(p => p.id === id);
-  const [tasks, setTasks] = useState<Task[]>(() => getTasksForProcess(id ?? ''));
+  const [tasks, setTasks] = useState<Task[]>(() =>
+    getTasksForProcess(id ?? ''),
+  );
 
   if (!process) return <Navigate to="/procesos" />;
 

@@ -1,5 +1,5 @@
 import { MOCK_TASKS } from './constants';
-import type { Task } from './types';
+import { type Task } from './types';
 
 const taskStore: Record<string, Task[]> = {};
 
