@@ -1,7 +1,7 @@
 import { MOCK_PROCESSES } from '../constants';
 import { MOCK_TASKS } from '../Detail/constants';
 
-import { type ManageableProcess } from './types';
+import { type ManageableProcess, type ProcessFrequency } from './types';
 
 let store: ManageableProcess[] | null = null;
 
@@ -11,6 +11,7 @@ const init = (): ManageableProcess[] => {
       id: p.id,
       name: p.name,
       area: p.area,
+      frequency: 'daily' as ProcessFrequency,
       tasks: (MOCK_TASKS[p.id] ?? []).map(t => ({ ...t })),
     }));
   }
@@ -19,16 +20,26 @@ const init = (): ManageableProcess[] => {
 
 export const getProcessList = (): ManageableProcess[] => init();
 
-export const addProcess = (name: string, area: string): void => {
+export const addProcess = (
+  name: string,
+  area: string,
+  frequency: ProcessFrequency,
+): void => {
   const id = String(Date.now());
-  init().push({ id, name, area, tasks: [] });
+  init().push({ id, name, area, frequency, tasks: [] });
 };
 
-export const updateProcess = (id: string, name: string, area: string): void => {
+export const updateProcess = (
+  id: string,
+  name: string,
+  area: string,
+  frequency: ProcessFrequency,
+): void => {
   const p = init().find(proc => proc.id === id);
   if (p) {
     p.name = name;
     p.area = area;
+    p.frequency = frequency;
   }
 };
 

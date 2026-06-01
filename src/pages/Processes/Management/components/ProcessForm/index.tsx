@@ -5,10 +5,18 @@ import { z } from 'zod';
 import Stack from '@material-hu/mui/Stack';
 
 import FormInputClassic from '@material-hu/components/design-system/Inputs/Classic/form';
+import FormInputSelect from '@material-hu/components/design-system/Inputs/Select/form';
+
+const FREQUENCY_OPTIONS = [
+  { label: 'Diario', value: 'daily' },
+  { label: 'Semanal', value: 'weekly' },
+  { label: 'Sin frecuencia', value: 'none' },
+];
 
 const schema = z.object({
   name: z.string().min(1, 'Requerido').max(100),
   area: z.string().min(1, 'Requerido').max(50),
+  frequency: z.enum(['daily', 'weekly', 'none']),
 });
 
 export type ProcessFormValues = z.infer<typeof schema>;
@@ -21,7 +29,7 @@ type Props = {
 const ProcessForm = ({ defaultValues, onSubmit }: Props) => {
   const methods = useForm<ProcessFormValues>({
     resolver: zodResolver(schema),
-    defaultValues: defaultValues ?? { name: '', area: '' },
+    defaultValues: defaultValues ?? { name: '', area: '', frequency: 'daily' },
   });
   return (
     <FormProvider {...methods}>
@@ -45,6 +53,13 @@ const ProcessForm = ({ defaultValues, onSubmit }: Props) => {
               label: 'Área',
               placeholder: 'Ej: Operaciones',
               maxLength: 50,
+            }}
+          />
+          <FormInputSelect
+            name="frequency"
+            inputProps={{
+              label: 'Frecuencia',
+              options: FREQUENCY_OPTIONS,
             }}
           />
         </Stack>

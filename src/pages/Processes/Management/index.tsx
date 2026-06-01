@@ -28,7 +28,13 @@ import {
   removeProcess,
   updateProcess,
 } from './store';
-import { type ManageableProcess } from './types';
+import { type ManageableProcess, type ProcessFrequency } from './types';
+
+const FREQUENCY_LABELS: Record<ProcessFrequency, string> = {
+  daily: 'Diario',
+  weekly: 'Semanal',
+  none: 'Sin frecuencia',
+};
 
 const ManagementPage = () => {
   const navigate = useNavigate();
@@ -48,7 +54,7 @@ const ManagementPage = () => {
       children: (
         <ProcessForm
           onSubmit={(data: ProcessFormValues) => {
-            addProcess(data.name, data.area);
+            addProcess(data.name, data.area, data.frequency);
             refresh();
             closeDrawer();
           }}
@@ -72,9 +78,13 @@ const ManagementPage = () => {
       size: 'medium',
       children: (
         <ProcessForm
-          defaultValues={{ name: process.name, area: process.area }}
+          defaultValues={{
+            name: process.name,
+            area: process.area,
+            frequency: process.frequency,
+          }}
           onSubmit={(data: ProcessFormValues) => {
-            updateProcess(process.id, data.name, data.area);
+            updateProcess(process.id, data.name, data.area, data.frequency);
             refresh();
             closeDrawer();
           }}
@@ -200,7 +210,8 @@ const ManagementPage = () => {
                     sx={{ color: 'text.secondary' }}
                   >
                     {process.tasks.length}{' '}
-                    {process.tasks.length === 1 ? 'tarea' : 'tareas'}
+                    {process.tasks.length === 1 ? 'tarea' : 'tareas'} ·{' '}
+                    {FREQUENCY_LABELS[process.frequency]}
                   </Typography>
                 </Stack>
                 <IconButton
