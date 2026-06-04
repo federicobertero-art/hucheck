@@ -8,12 +8,13 @@ import { DialogLayerProvider } from '@material-hu/components/layers/Dialogs';
 import { DrawerLayerProvider } from '@material-hu/components/layers/Drawers';
 import { MenuLayerProvider } from '@material-hu/components/layers/Menus';
 
-import { MobileLayout } from './layouts/MobileLayout';
+import { DashboardLayout } from './layouts/DashboardLayout';
 import AuditsPage from './pages/Audits';
 import { HomePage } from './pages/Home';
 import NoticesPage from './pages/Notices';
 import ProcessesPage from './pages/Processes';
 import CompliancePage from './pages/Processes/Compliance';
+import ComplianceHistoryPage from './pages/Processes/ComplianceHistory';
 import ProcessDetail from './pages/Processes/Detail';
 import ManagementPage from './pages/Processes/Management';
 import './i18n';
@@ -30,7 +31,7 @@ const App = () => {
             <DrawerLayerProvider>
               <BrowserRouter>
                 <Routes>
-                  <Route element={<MobileLayout />}>
+                  <Route element={<DashboardLayout />}>
                     <Route
                       path="/"
                       element={<HomePage />}
@@ -42,6 +43,10 @@ const App = () => {
                     <Route
                       path="/procesos/cumplimiento"
                       element={<CompliancePage />}
+                    />
+                    <Route
+                      path="/procesos/cumplimiento/:id"
+                      element={<ComplianceHistoryPage />}
                     />
                     <Route
                       path="/procesos/gestion"

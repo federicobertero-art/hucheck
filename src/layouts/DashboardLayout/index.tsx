@@ -1,7 +1,11 @@
-import { type ReactNode, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 
-import { IconHome } from '@material-hu/icons/tabler';
+import {
+  IconBell,
+  IconChecklist,
+  IconClipboardCheck,
+} from '@material-hu/icons/tabler';
 import Stack from '@material-hu/mui/Stack';
 
 import HomeHeader from '@material-hu/components/design-system/Header/Home';
@@ -17,16 +21,31 @@ import humandLogo from '../../assets/humand.svg';
 const SECTIONS: NavSectionProps[] = [
   {
     key: 'main',
-    title: 'Main',
-    items: [{ key: 'home', title: 'Home', path: '/', icon: <IconHome /> }],
+    title: 'Principal',
+    items: [
+      {
+        key: 'processes',
+        title: 'Procesos',
+        path: '/procesos',
+        icon: <IconChecklist />,
+      },
+      {
+        key: 'notices',
+        title: 'Avisos',
+        path: '/avisos',
+        icon: <IconBell />,
+      },
+      {
+        key: 'audits',
+        title: 'Auditorías',
+        path: '/auditorias',
+        icon: <IconClipboardCheck />,
+      },
+    ],
   },
 ];
 
-type DashboardLayoutProps = {
-  children: ReactNode;
-};
-
-export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+export const DashboardLayout = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const { pathname } = useLocation();
 
@@ -43,11 +62,9 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         isAdmin={false}
         avatarProps={{ text: 'U' }}
         avatarPopoverContent={null}
-        onOpenLanguageMenu={() => {}}
+        onOpenLanguageMenu={() => undefined}
         supportButtonProps={{ href: '#' }}
-        sx={{
-          position: 'sticky',
-        }}
+        sx={{ position: 'sticky', top: 0, zIndex: 100 }}
       />
       <Stack sx={{ flexDirection: 'row' }}>
         <Sidebar
@@ -67,15 +84,14 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           component="main"
           sx={{
             flex: 1,
-            pt: 5,
-            pb: 5,
-            px: 12,
+            py: 4,
+            px: 6,
             maxWidth: `calc(100% - ${sidebarWidth}px)`,
             bgcolor: 'new.background.layout.default',
             minHeight: 'calc(100vh - 70px)',
           }}
         >
-          {children}
+          <Outlet />
         </Stack>
       </Stack>
     </Stack>

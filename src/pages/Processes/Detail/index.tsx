@@ -27,7 +27,7 @@ const ProcessDetail = () => {
   const completedCount = tasks.filter(t => t.completed).length;
 
   const toggleTask = (taskId: string) => {
-    toggleTaskInStore(id ?? '', taskId);
+    toggleTaskInStore(id ?? '', taskId, 'Federico B.');
     setTasks([...getTasksForProcess(id ?? '')]);
   };
 

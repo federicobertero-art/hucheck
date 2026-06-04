@@ -10,8 +10,15 @@ export const getTasksForProcess = (processId: string): Task[] => {
   return taskStore[processId];
 };
 
-export const toggleTaskInStore = (processId: string, taskId: string): void => {
+export const toggleTaskInStore = (
+  processId: string,
+  taskId: string,
+  completedBy?: string,
+): void => {
   const tasks = getTasksForProcess(processId);
   const task = tasks.find(t => t.id === taskId);
-  if (task) task.completed = !task.completed;
+  if (task) {
+    task.completed = !task.completed;
+    task.completedBy = task.completed ? completedBy : undefined;
+  }
 };

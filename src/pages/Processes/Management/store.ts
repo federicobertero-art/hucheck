@@ -11,7 +11,7 @@ const init = (): ManageableProcess[] => {
       id: p.id,
       name: p.name,
       area: p.area,
-      frequency: 'daily' as ProcessFrequency,
+      frequency: p.frequency,
       tasks: (MOCK_TASKS[p.id] ?? []).map(t => ({ ...t })),
     }));
   }

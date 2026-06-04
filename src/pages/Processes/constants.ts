@@ -19,6 +19,7 @@ export const MOCK_PROCESSES: DailyProcess[] = [
     completedTasks: 3,
     totalTasks: 8,
     status: 'in_progress',
+    frequency: 'daily',
   },
   {
     id: '2',
@@ -27,6 +28,7 @@ export const MOCK_PROCESSES: DailyProcess[] = [
     completedTasks: 0,
     totalTasks: 4,
     status: 'pending',
+    frequency: 'daily',
   },
   {
     id: '3',
@@ -35,6 +37,7 @@ export const MOCK_PROCESSES: DailyProcess[] = [
     completedTasks: 6,
     totalTasks: 6,
     status: 'completed',
+    frequency: 'daily',
   },
   {
     id: '4',
@@ -43,5 +46,6 @@ export const MOCK_PROCESSES: DailyProcess[] = [
     completedTasks: 1,
     totalTasks: 5,
     status: 'in_progress',
+    frequency: 'weekly',
   },
 ];

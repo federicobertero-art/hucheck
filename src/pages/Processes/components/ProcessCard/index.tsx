@@ -12,6 +12,12 @@ import { type DailyProcess } from '../../types';
 
 type Props = { process: DailyProcess };
 
+const FREQUENCY_LABEL: Record<string, string> = {
+  daily: 'Diario',
+  weekly: 'Semanal',
+  none: 'Sin frecuencia',
+};
+
 const ProcessCard = ({ process }: Props) => {
   const navigate = useNavigate();
   const { label, type } = STATUS_CONFIG[process.status];
@@ -42,7 +48,7 @@ const ProcessCard = ({ process }: Props) => {
               variant="body2"
               sx={{ color: 'text.secondary' }}
             >
-              {process.area}
+              {process.area} · {FREQUENCY_LABEL[process.frequency]}
             </Typography>
           </Stack>
           <Pills
