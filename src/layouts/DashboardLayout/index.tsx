@@ -3,10 +3,13 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 import {
   IconBell,
+  IconBuildingStore,
   IconChecklist,
   IconClipboardCheck,
+  IconReportAnalytics,
 } from '@material-hu/icons/tabler';
 import Stack from '@material-hu/mui/Stack';
+import Typography from '@material-hu/mui/Typography';
 
 import HomeHeader from '@material-hu/components/design-system/Header/Home';
 import Sidebar from '@material-hu/components/design-system/Sidebar';
@@ -15,6 +18,9 @@ import {
   SIDEBAR_WIDTH,
 } from '@material-hu/components/design-system/Sidebar/constants';
 import { type NavSectionProps } from '@material-hu/components/design-system/Sidebar/types';
+
+import { useBranch } from '../../contexts/BranchContext';
+import { MOCK_BRANCHES } from '../../pages/Processes/branches';
 
 import humandLogo from '../../assets/humand.svg';
 
@@ -41,6 +47,12 @@ const SECTIONS: NavSectionProps[] = [
         path: '/auditorias',
         icon: <IconClipboardCheck />,
       },
+      {
+        key: 'reporting',
+        title: 'Reportería',
+        path: '/reporteria',
+        icon: <IconReportAnalytics />,
+      },
     ],
   },
 ];
@@ -48,6 +60,7 @@ const SECTIONS: NavSectionProps[] = [
 export const DashboardLayout = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const { pathname } = useLocation();
+  const { branchId, setBranchId } = useBranch();
 
   const sidebarWidth = isCollapsed ? SIDEBAR_COLLAPSED_WIDTH : SIDEBAR_WIDTH;
 
@@ -66,6 +79,54 @@ export const DashboardLayout = () => {
         supportButtonProps={{ href: '#' }}
         sx={{ position: 'sticky', top: 0, zIndex: 100 }}
       />
+      {/* Global branch selector bar */}
+      <Stack
+        sx={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 1.5,
+          px: 3,
+          py: 1,
+          bgcolor: 'background.paper',
+          borderBottom: '1px solid',
+          borderColor: 'divider',
+          position: 'sticky',
+          top: '70px',
+          zIndex: 99,
+        }}
+      >
+        <IconBuildingStore size={16} style={{ color: '#6b7280', flexShrink: 0 }} />
+        <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 600, flexShrink: 0 }}>
+          Sucursal:
+        </Typography>
+        {MOCK_BRANCHES.map(branch => (
+          <Stack
+            key={branch.id}
+            onClick={() => setBranchId(branch.id)}
+            sx={{
+              px: 1.5,
+              py: 0.5,
+              borderRadius: 2,
+              cursor: 'pointer',
+              bgcolor: branchId === branch.id ? 'primary.main' : 'transparent',
+              transition: 'background-color 0.15s',
+              '&:hover': {
+                bgcolor: branchId === branch.id ? 'primary.main' : 'action.hover',
+              },
+            }}
+          >
+            <Typography
+              variant="caption"
+              sx={{
+                fontWeight: branchId === branch.id ? 700 : 400,
+                color: branchId === branch.id ? 'primary.contrastText' : 'text.primary',
+              }}
+            >
+              {branch.name}
+            </Typography>
+          </Stack>
+        ))}
+      </Stack>
       <Stack sx={{ flexDirection: 'row' }}>
         <Sidebar
           isCollapsed={isCollapsed}
@@ -74,10 +135,10 @@ export const DashboardLayout = () => {
           openMenu={() => setIsCollapsed(false)}
           sx={{
             position: 'sticky',
-            top: '70px',
+            top: '110px',
             bottom: 0,
             left: 0,
-            height: 'calc(100vh - 70px)',
+            height: 'calc(100vh - 110px)',
           }}
         />
         <Stack

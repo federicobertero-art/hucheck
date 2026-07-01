@@ -1,5 +1,5 @@
 {
-  "installCommand": "echo '//npm.pkg.github.com/:_authToken='$GITHUB_TOKEN >> .npmrc && rm -f bun.lockb && bun install",
+  "installCommand": "rm -f bun.lockb && GITHUB_TOKEN=$GITHUB_TOKEN bun install",
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]

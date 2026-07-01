@@ -8,6 +8,7 @@ import { DialogLayerProvider } from '@material-hu/components/layers/Dialogs';
 import { DrawerLayerProvider } from '@material-hu/components/layers/Drawers';
 import { MenuLayerProvider } from '@material-hu/components/layers/Menus';
 
+import { BranchProvider } from './contexts/BranchContext';
 import { DashboardLayout } from './layouts/DashboardLayout';
 import AuditsPage from './pages/Audits';
 import { HomePage } from './pages/Home';
@@ -17,6 +18,7 @@ import CompliancePage from './pages/Processes/Compliance';
 import ComplianceHistoryPage from './pages/Processes/ComplianceHistory';
 import ProcessDetail from './pages/Processes/Detail';
 import ManagementPage from './pages/Processes/Management';
+import ReportingPage from './pages/Reporting';
 import './i18n';
 
 const theme = createHuGoTheme();
@@ -29,6 +31,7 @@ const App = () => {
         <MenuLayerProvider>
           <DialogLayerProvider>
             <DrawerLayerProvider>
+              <BranchProvider>
               <BrowserRouter>
                 <Routes>
                   <Route element={<DashboardLayout />}>
@@ -64,9 +67,14 @@ const App = () => {
                       path="/auditorias"
                       element={<AuditsPage />}
                     />
+                    <Route
+                      path="/reporteria"
+                      element={<ReportingPage />}
+                    />
                   </Route>
                 </Routes>
               </BrowserRouter>
+              </BranchProvider>
             </DrawerLayerProvider>
           </DialogLayerProvider>
         </MenuLayerProvider>
