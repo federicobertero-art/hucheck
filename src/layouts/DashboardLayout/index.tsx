@@ -20,9 +20,8 @@ import {
 import { type NavSectionProps } from '@material-hu/components/design-system/Sidebar/types';
 
 import { useBranch } from '../../contexts/BranchContext';
-import { MOCK_BRANCHES } from '../../pages/Processes/branches';
-
 import humandLogo from '../../assets/humand.svg';
+import { useBranches } from "../../pages/Processes/useBranches";
 
 const SECTIONS: NavSectionProps[] = [
   {
@@ -58,6 +57,7 @@ const SECTIONS: NavSectionProps[] = [
 ];
 
 export const DashboardLayout = () => {
+    const { data: branches = [] } = useBranches();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const { pathname } = useLocation();
   const { branchId, setBranchId } = useBranch();
@@ -99,7 +99,7 @@ export const DashboardLayout = () => {
         <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 600, flexShrink: 0 }}>
           Sucursal:
         </Typography>
-        {MOCK_BRANCHES.map(branch => (
+        {branches.map(branch => (
           <Stack
             key={branch.id}
             onClick={() => setBranchId(branch.id)}

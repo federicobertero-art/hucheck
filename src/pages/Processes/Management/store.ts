@@ -1,5 +1,6 @@
 import { MOCK_PROCESSES } from '../constants';
 import { MOCK_TASKS } from '../Detail/constants';
+import { type Task } from '../Detail/types';
 
 import { type ManageableProcess, type ProcessFrequency } from './types';
 
@@ -45,4 +46,29 @@ export const updateProcess = (
 
 export const removeProcess = (id: string): void => {
   store = init().filter(p => p.id !== id);
+};
+
+export const addTask = (processId: string, name: string): void => {
+  const process = init().find(p => p.id === processId);
+  if (!process) return;
+  const task: Task = { id: `${processId}-${Date.now()}`, name, assignedTo: [] };
+  process.tasks.push(task);
+};
+
+export const updateTask = (
+  processId: string,
+  taskId: string,
+  name: string,
+): void => {
+  const process = init().find(p => p.id === processId);
+  const task = process?.tasks.find(t => t.id === taskId);
+  if (task) {
+    task.name = name;
+  }
+};
+
+export const removeTask = (processId: string, taskId: string): void => {
+  const process = init().find(p => p.id === processId);
+  if (!process) return;
+  process.tasks = process.tasks.filter(t => t.id !== taskId);
 };

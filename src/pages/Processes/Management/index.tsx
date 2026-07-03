@@ -6,6 +6,7 @@ import {
   IconClipboardList,
   IconDotsVertical,
   IconEdit,
+  IconListCheck,
   IconPlus,
   IconTrash,
 } from '@material-hu/icons/tabler';
@@ -22,6 +23,7 @@ import { useDrawerLayer } from '@material-hu/components/layers/Drawers';
 import { useMenuLayer } from '@material-hu/components/layers/Menus';
 
 import ProcessForm, { type ProcessFormValues } from './components/ProcessForm';
+import ProcessTasksDrawerContent from './components/ProcessTasksDrawerContent';
 import {
   addProcess,
   getProcessList,
@@ -122,6 +124,21 @@ const ManagementPage = () => {
     });
   };
 
+  const handleManageTasks = (process: ManageableProcess) => {
+    openDrawer({
+      title: `Tareas de ${process.name}`,
+      size: 'medium',
+      children: <ProcessTasksDrawerContent processId={process.id} />,
+      secondaryButtonProps: {
+        children: 'Cerrar',
+        onClick: () => {
+          closeDrawer();
+          refresh();
+        },
+      },
+    });
+  };
+
   const handleMenu = (
     e: React.MouseEvent<HTMLElement>,
     process: ManageableProcess,
@@ -129,6 +146,12 @@ const ManagementPage = () => {
     openMenu({
       anchorEl: e.currentTarget,
       items: [
+        {
+          id: 'manage-tasks',
+          title: 'Gestionar tareas',
+          icon: IconListCheck,
+          onSelect: () => handleManageTasks(process),
+        },
         {
           id: 'edit',
           title: 'Editar',

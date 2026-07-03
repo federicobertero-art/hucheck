@@ -14,6 +14,7 @@ import Pills from '@material-hu/components/design-system/Pills';
 import Title from '@material-hu/components/design-system/Title';
 
 import { useBranch } from '../../contexts/BranchContext';
+import { useNotices } from "./useNotices";
 
 type NoticePriority = 'urgent' | 'info' | 'reminder';
 
@@ -29,76 +30,6 @@ interface Notice {
 }
 
 const CURRENT_USER = 'Federico B.';
-
-const MOCK_NOTICES: Notice[] = [
-  {
-    id: 'n1',
-    title: 'Cierre anticipado por mantenimiento — Sucursal Norte',
-    content:
-      'El día viernes 27 de junio la sucursal Norte cerrará a las 18:00 hs por trabajos de mantenimiento eléctrico. Por favor coordinar turnos con el supervisor de área.',
-    date: '2026-06-23',
-    author: 'Recursos Humanos',
-    priority: 'urgent',
-    readBy: [],
-    branchId: 'b2',
-  },
-  {
-    id: 'n2',
-    title: 'Nuevo protocolo de higiene — vigente desde julio',
-    content:
-      'A partir del 1 de julio entra en vigencia el protocolo actualizado de higiene y desinfección. Todos los responsables de turno deben completar el módulo de capacitación antes del 30 de junio. El material está disponible en el portal interno.',
-    date: '2026-06-20',
-    author: 'Calidad',
-    priority: 'info',
-    readBy: ['Federico B.', 'Ana G.'],
-    branchId: 'all',
-  },
-  {
-    id: 'n3',
-    title: 'Recordatorio: auditoría interna — semana del 30 de junio',
-    content:
-      'Se realizará la auditoría interna trimestral la semana del 30 de junio. Asegurarse de tener al día los registros de temperatura, limpieza e inventario de los últimos 30 días.',
-    date: '2026-06-18',
-    author: 'Operaciones',
-    priority: 'reminder',
-    readBy: ['Federico B.'],
-    branchId: 'b1',
-  },
-  {
-    id: 'n4',
-    title: 'Incorporación de nuevo sistema de turnos',
-    content:
-      'A partir del 1 de julio los turnos se gestionarán desde la app. Los líderes de cada sucursal recibirán acceso de administrador. Consultas al área de Sistemas.',
-    date: '2026-06-15',
-    author: 'Sistemas',
-    priority: 'info',
-    readBy: ['Federico B.', 'Ana G.', 'Marcos L.'],
-    branchId: 'all',
-  },
-  {
-    id: 'n5',
-    title: 'Falla en el sistema de refrigeración',
-    content:
-      'Se detectó una falla en el sistema de refrigeración principal. Se solicitó el técnico y estará en el local antes de las 14:00 hs. Monitorear temperatura cada 30 minutos hasta solución.',
-    date: '2026-06-22',
-    author: 'Mantenimiento',
-    priority: 'urgent',
-    readBy: [],
-    branchId: 'b3',
-  },
-  {
-    id: 'n6',
-    title: 'Inventario de fin de mes',
-    content:
-      'El inventario de cierre de junio se realizará el lunes 30 a partir de las 08:00 hs. Participación obligatoria para responsables de stock.',
-    date: '2026-06-21',
-    author: 'Operaciones',
-    priority: 'reminder',
-    readBy: [],
-    branchId: 'b2',
-  },
-];
-
 const PRIORITY_CONFIG: Record<
   NoticePriority,
   { label: string; type: 'error' | 'info' | 'warning'; icon: React.ElementType }
@@ -109,8 +40,9 @@ const PRIORITY_CONFIG: Record<
 };
 
 const NoticesPage = () => {
+    const { data: noticesData = [] } = useNotices();
   const { branchId } = useBranch();
-  const [notices, setNotices] = useState<Notice[]>(MOCK_NOTICES);
+  const [notices, setNotices] = useState<Notice[]>(noticesData);
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const markAsRead = (id: string) => {

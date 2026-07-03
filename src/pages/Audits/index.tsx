@@ -15,7 +15,8 @@ import ProgressBar from '@material-hu/components/design-system/ProgressIndicator
 import Title from '@material-hu/components/design-system/Title';
 
 import { useBranch } from '../../contexts/BranchContext';
-import { MOCK_BRANCHES } from '../Processes/branches';
+import { useAudits } from "./useAudits";
+import { useBranches } from "../Processes/useBranches";
 
 type AuditStatus = 'approved' | 'rejected' | 'observations';
 
@@ -37,72 +38,6 @@ interface Audit {
   items: AuditItem[];
 }
 
-const MOCK_AUDITS: Audit[] = [
-  {
-    id: 'a1',
-    date: '2026-06-20',
-    branch: 'Central',
-    auditor: 'Ana G.',
-    process: 'Apertura del local',
-    status: 'approved',
-    score: 95,
-    items: [
-      { id: 'a1-1', label: 'Iluminación operativa', passed: true },
-      { id: 'a1-2', label: 'Temperatura de refrigeración dentro de rango', passed: true },
-      { id: 'a1-3', label: 'Registro de apertura completo', passed: true },
-      { id: 'a1-4', label: 'Personal con uniforme reglamentario', passed: false, observation: 'Un empleado sin cofia' },
-      { id: 'a1-5', label: 'Área de caja habilitada y con fondo', passed: true },
-    ],
-  },
-  {
-    id: 'a2',
-    date: '2026-06-18',
-    branch: 'Norte',
-    auditor: 'Marcos L.',
-    process: 'Control de higiene',
-    status: 'observations',
-    score: 72,
-    items: [
-      { id: 'a2-1', label: 'Superficies desinfectadas', passed: true },
-      { id: 'a2-2', label: 'Utensilios en condiciones', passed: false, observation: 'Tabla de corte con manchas visibles' },
-      { id: 'a2-3', label: 'Registro de limpieza firmado', passed: false, observation: 'Sin firmar turno tarde' },
-      { id: 'a2-4', label: 'Dispensadores de jabón llenos', passed: true },
-      { id: 'a2-5', label: 'Piso libre de manchas', passed: true },
-    ],
-  },
-  {
-    id: 'a3',
-    date: '2026-06-15',
-    branch: 'Sur',
-    auditor: 'Sofía R.',
-    process: 'Inventario y stock',
-    status: 'rejected',
-    score: 48,
-    items: [
-      { id: 'a3-1', label: 'Inventario actualizado en sistema', passed: false, observation: 'Sistema sin actualizar hace 3 días' },
-      { id: 'a3-2', label: 'Stock mínimo de producto A', passed: false, observation: 'Por debajo del mínimo requerido' },
-      { id: 'a3-3', label: 'Stock mínimo de producto B', passed: true },
-      { id: 'a3-4', label: 'Planilla de diferencias archivada', passed: false, observation: 'No se encontró planilla del mes' },
-      { id: 'a3-5', label: 'Responsable de inventario identificado', passed: true },
-    ],
-  },
-  {
-    id: 'a4',
-    date: '2026-06-10',
-    branch: 'Central',
-    auditor: 'Ana G.',
-    process: 'Control de temperatura',
-    status: 'approved',
-    score: 100,
-    items: [
-      { id: 'a4-1', label: 'Temperatura registrada en horario', passed: true },
-      { id: 'a4-2', label: 'Planilla completa sin faltantes', passed: true },
-      { id: 'a4-3', label: 'Alertas gestionadas correctamente', passed: true },
-      { id: 'a4-4', label: 'Equipo de medición calibrado', passed: true },
-    ],
-  },
-];
-
 const STATUS_CONFIG: Record<
   AuditStatus,
   { label: string; type: 'success' | 'error' | 'warning' }
@@ -113,11 +48,13 @@ const STATUS_CONFIG: Record<
 };
 
 const AuditsPage = () => {
+    const { data: branches = [] } = useBranches();
+    const { data: audits = [] } = useAudits();
   const { branchId } = useBranch();
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
-  const currentBranchName = MOCK_BRANCHES.find(b => b.id === branchId)?.name ?? '';
-  const visibleAudits = MOCK_AUDITS.filter(a => a.branch === currentBranchName);
+  const currentBranchName = branches.find(b => b.id === branchId)?.name ?? '';
+  const visibleAudits = audits.filter(a => a.branch === currentBranchName);
 
   return (
     <Stack sx={{ gap: 3 }}>

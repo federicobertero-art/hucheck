@@ -1,0 +1,307 @@
+{
+  "audits": [
+    {
+      "id": "a1",
+      "date": "2026-06-20",
+      "branch": "Central",
+      "auditor": "Ana G.",
+      "process": "Apertura del local",
+      "status": "approved",
+      "score": 95,
+      "items": [
+        {
+          "id": "a1-1",
+          "label": "Iluminación operativa",
+          "passed": true
+        },
+        {
+          "id": "a1-2",
+          "label": "Temperatura de refrigeración dentro de rango",
+          "passed": true
+        },
+        {
+          "id": "a1-3",
+          "label": "Registro de apertura completo",
+          "passed": true
+        },
+        {
+          "id": "a1-4",
+          "label": "Personal con uniforme reglamentario",
+          "passed": false,
+          "observation": "Un empleado sin cofia"
+        },
+        {
+          "id": "a1-5",
+          "label": "Área de caja habilitada y con fondo",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "a2",
+      "date": "2026-06-18",
+      "branch": "Norte",
+      "auditor": "Marcos L.",
+      "process": "Control de higiene",
+      "status": "observations",
+      "score": 72,
+      "items": [
+        {
+          "id": "a2-1",
+          "label": "Superficies desinfectadas",
+          "passed": true
+        },
+        {
+          "id": "a2-2",
+          "label": "Utensilios en condiciones",
+          "passed": false,
+          "observation": "Tabla de corte con manchas visibles"
+        },
+        {
+          "id": "a2-3",
+          "label": "Registro de limpieza firmado",
+          "passed": false,
+          "observation": "Sin firmar turno tarde"
+        },
+        {
+          "id": "a2-4",
+          "label": "Dispensadores de jabón llenos",
+          "passed": true
+        },
+        {
+          "id": "a2-5",
+          "label": "Piso libre de manchas",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "a3",
+      "date": "2026-06-15",
+      "branch": "Sur",
+      "auditor": "Sofía R.",
+      "process": "Inventario y stock",
+      "status": "rejected",
+      "score": 48,
+      "items": [
+        {
+          "id": "a3-1",
+          "label": "Inventario actualizado en sistema",
+          "passed": false,
+          "observation": "Sistema sin actualizar hace 3 días"
+        },
+        {
+          "id": "a3-2",
+          "label": "Stock mínimo de producto A",
+          "passed": false,
+          "observation": "Por debajo del mínimo requerido"
+        },
+        {
+          "id": "a3-3",
+          "label": "Stock mínimo de producto B",
+          "passed": true
+        },
+        {
+          "id": "a3-4",
+          "label": "Planilla de diferencias archivada",
+          "passed": false,
+          "observation": "No se encontró planilla del mes"
+        },
+        {
+          "id": "a3-5",
+          "label": "Responsable de inventario identificado",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "a4",
+      "date": "2026-06-10",
+      "branch": "Central",
+      "auditor": "Ana G.",
+      "process": "Control de temperatura",
+      "status": "approved",
+      "score": 100,
+      "items": [
+        {
+          "id": "a4-1",
+          "label": "Temperatura registrada en horario",
+          "passed": true
+        },
+        {
+          "id": "a4-2",
+          "label": "Planilla completa sin faltantes",
+          "passed": true
+        },
+        {
+          "id": "a4-3",
+          "label": "Alertas gestionadas correctamente",
+          "passed": true
+        },
+        {
+          "id": "a4-4",
+          "label": "Equipo de medición calibrado",
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "notices": [
+    {
+      "id": "n1",
+      "title": "Cierre anticipado por mantenimiento — Sucursal Norte",
+      "content": "El día viernes 27 de junio la sucursal Norte cerrará a las 18:00 hs por trabajos de mantenimiento eléctrico. Por favor coordinar turnos con el supervisor de área.",
+      "date": "2026-06-23",
+      "author": "Recursos Humanos",
+      "priority": "urgent",
+      "readBy": [],
+      "branchId": "b2"
+    },
+    {
+      "id": "n2",
+      "title": "Nuevo protocolo de higiene — vigente desde julio",
+      "content": "A partir del 1 de julio entra en vigencia el protocolo actualizado de higiene y desinfección. Todos los responsables de turno deben completar el módulo de capacitación antes del 30 de junio. El material está disponible en el portal interno.",
+      "date": "2026-06-20",
+      "author": "Calidad",
+      "priority": "info",
+      "readBy": [
+        "Federico B.",
+        "Ana G."
+      ],
+      "branchId": "all"
+    },
+    {
+      "id": "n3",
+      "title": "Recordatorio: auditoría interna — semana del 30 de junio",
+      "content": "Se realizará la auditoría interna trimestral la semana del 30 de junio. Asegurarse de tener al día los registros de temperatura, limpieza e inventario de los últimos 30 días.",
+      "date": "2026-06-18",
+      "author": "Operaciones",
+      "priority": "reminder",
+      "readBy": [
+        "Federico B."
+      ],
+      "branchId": "b1"
+    },
+    {
+      "id": "n4",
+      "title": "Incorporación de nuevo sistema de turnos",
+      "content": "A partir del 1 de julio los turnos se gestionarán desde la app. Los líderes de cada sucursal recibirán acceso de administrador. Consultas al área de Sistemas.",
+      "date": "2026-06-15",
+      "author": "Sistemas",
+      "priority": "info",
+      "readBy": [
+        "Federico B.",
+        "Ana G.",
+        "Marcos L."
+      ],
+      "branchId": "all"
+    },
+    {
+      "id": "n5",
+      "title": "Falla en el sistema de refrigeración",
+      "content": "Se detectó una falla en el sistema de refrigeración principal. Se solicitó el técnico y estará en el local antes de las 14:00 hs. Monitorear temperatura cada 30 minutos hasta solución.",
+      "date": "2026-06-22",
+      "author": "Mantenimiento",
+      "priority": "urgent",
+      "readBy": [],
+      "branchId": "b3"
+    },
+    {
+      "id": "n6",
+      "title": "Inventario de fin de mes",
+      "content": "El inventario de cierre de junio se realizará el lunes 30 a partir de las 08:00 hs. Participación obligatoria para responsables de stock.",
+      "date": "2026-06-21",
+      "author": "Operaciones",
+      "priority": "reminder",
+      "readBy": [],
+      "branchId": "b2"
+    }
+  ],
+  "branches": [
+    {
+      "id": "b1",
+      "name": "Central",
+      "address": "Av. Corrientes 1234, CABA"
+    },
+    {
+      "id": "b2",
+      "name": "Norte",
+      "address": "Av. Cabildo 2100, Belgrano"
+    },
+    {
+      "id": "b3",
+      "name": "Sur",
+      "address": "Av. Rivadavia 8500, Liniers"
+    }
+  ],
+  "processes": [
+    {
+      "id": "1",
+      "name": "Apertura de local",
+      "area": "Operaciones",
+      "completedTasks": 3,
+      "totalTasks": 8,
+      "status": "in_progress",
+      "frequency": "daily"
+    },
+    {
+      "id": "2",
+      "name": "Control de temperatura",
+      "area": "Calidad",
+      "completedTasks": 0,
+      "totalTasks": 4,
+      "status": "pending",
+      "frequency": "daily"
+    },
+    {
+      "id": "3",
+      "name": "Inventario diario",
+      "area": "Logística",
+      "completedTasks": 6,
+      "totalTasks": 6,
+      "status": "completed",
+      "frequency": "daily"
+    },
+    {
+      "id": "4",
+      "name": "Limpieza de área de trabajo",
+      "area": "Higiene",
+      "completedTasks": 1,
+      "totalTasks": 5,
+      "status": "in_progress",
+      "frequency": "weekly"
+    }
+  ],
+  "employees": [
+    {
+      "id": "e1",
+      "name": "Federico B.",
+      "area": "Operaciones"
+    },
+    {
+      "id": "e2",
+      "name": "Ana G.",
+      "area": "Calidad"
+    },
+    {
+      "id": "e3",
+      "name": "Marcos L.",
+      "area": "Logística"
+    },
+    {
+      "id": "e4",
+      "name": "Sofía R.",
+      "area": "Higiene"
+    },
+    {
+      "id": "e5",
+      "name": "Diego M.",
+      "area": "Operaciones"
+    },
+    {
+      "id": "e6",
+      "name": "Laura P.",
+      "area": "Calidad"
+    }
+  ]
+}

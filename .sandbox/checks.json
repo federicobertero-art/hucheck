@@ -1,0 +1,47 @@
+{
+  "checkedAt": "2026-07-03T18:59:57.642Z",
+  "project": {
+    "auth": "unsafe",
+    "persistence": [
+      "mock",
+      "mock-unmigrated",
+      "local"
+    ],
+    "extraDeps": [
+      "xlsx"
+    ],
+    "extraDevDeps": [
+      "humand-biome-config"
+    ],
+    "staleEntries": [],
+    "missingProviders": []
+  },
+  "mockData": {
+    "present": true,
+    "centralized": true,
+    "dispersedFiles": [
+      "src//pages/Reporting/index.tsx",
+      "src//pages/Processes/Management/store.ts",
+      "src//pages/Processes/Detail/constants.ts",
+      "src//pages/Processes/Detail/store.ts",
+      "src//pages/Processes/constants.ts",
+      "src//pages/Processes/ComplianceHistory/constants.ts",
+      "src//pages/Processes/branches.ts"
+    ]
+  },
+  "checks": {
+    "auth": "pass",
+    "authCoherence": "pass",
+    "folderStructure": "pass",
+    "libs": "fail",
+    "plugins": "pass",
+    "plan": "pass",
+    "providers": "pass",
+    "audit": "pass",
+    "aiKeys": "pass",
+    "githubRemote": "skip",
+    "vercelConnected": "skip",
+    "criticalCount": 0,
+    "gapCount": 1
+  }
+}

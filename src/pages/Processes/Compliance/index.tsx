@@ -6,8 +6,7 @@ import Stack from '@material-hu/mui/Stack';
 import Typography from '@material-hu/mui/Typography';
 
 import Title from '@material-hu/components/design-system/Title';
-
-import { MOCK_PROCESSES } from '../constants';
+import { useProcesses } from "../useProcesses";
 
 const FREQUENCY_LABEL: Record<string, string> = {
   daily: 'Diario',
@@ -16,6 +15,7 @@ const FREQUENCY_LABEL: Record<string, string> = {
 };
 
 const CompliancePage = () => {
+    const { data: processes = [] } = useProcesses();
   const navigate = useNavigate();
   return (
     <Stack sx={{ p: 3, gap: 3 }}>
@@ -29,7 +29,7 @@ const CompliancePage = () => {
         />
       </Stack>
       <Stack sx={{ gap: 1.5 }}>
-        {MOCK_PROCESSES.map(process => (
+        {processes.map(process => (
           <Stack
             key={process.id}
             onClick={() => navigate(`/procesos/cumplimiento/${process.id}`)}

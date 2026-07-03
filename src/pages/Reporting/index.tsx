@@ -11,12 +11,12 @@ import Pills from '@material-hu/components/design-system/Pills';
 import Title from '@material-hu/components/design-system/Title';
 
 import { useBranch } from '../../contexts/BranchContext';
-import { MOCK_BRANCHES } from '../Processes/branches';
 import { MOCK_TASKS } from '../Processes/Detail/constants';
 import { getShiftCompletions } from '../Processes/Detail/store';
 import { type TaskShift } from '../Processes/Detail/types';
-import { MOCK_EMPLOYEES } from '../Processes/employees';
-import { MOCK_PROCESSES } from '../Processes/constants';
+import { useBranches } from "../Processes/useBranches";
+import { useProcesses } from "../Processes/useProcesses";
+import { useEmployees } from "../Processes/useEmployees";
 
 const SHIFTS: TaskShift[] = ['morning', 'afternoon', 'night'];
 const SHIFT_LABEL: Record<TaskShift, string> = {
@@ -36,8 +36,11 @@ const getLast7Days = (): string[] => {
 };
 
 const ReportingPage = () => {
+    const { data: employees = [] } = useEmployees();
+    const { data: processes = [] } = useProcesses();
+    const { data: branches = [] } = useBranches();
   const { branchId } = useBranch();
-  const [processId, setProcessId] = useState(MOCK_PROCESSES[0]?.id ?? '1');
+  const [processId, setProcessId] = useState(processes[0]?.id ?? '1');
   const [shiftFilter, setShiftFilter] = useState<TaskShift | 'all'>('all');
 
   const days = getLast7Days();
@@ -45,7 +48,7 @@ const ReportingPage = () => {
   const shifts = shiftFilter === 'all' ? SHIFTS : [shiftFilter];
 
   // Build data: for each employee, for each task, count completions across last 7 days
-  const employeeRows = MOCK_EMPLOYEES.map(emp => {
+  const employeeRows = employees.map(emp => {
     const taskCounts = tasks.map(task => {
       let completed = 0;
       let total = 0;
@@ -80,8 +83,8 @@ const ReportingPage = () => {
   const exportExcel = () => {
     const rows = employeeRows.flatMap(({ emp, taskCounts }) =>
       tasks.map((task, ti) => ({
-        Sucursal: MOCK_BRANCHES.find(b => b.id === branchId)?.name ?? branchId,
-        Proceso: MOCK_PROCESSES.find(p => p.id === processId)?.name ?? processId,
+        Sucursal: branches.find(b => b.id === branchId)?.name ?? branchId,
+        Proceso: processes.find(p => p.id === processId)?.name ?? processId,
         Turno: shiftFilter === 'all' ? 'Todos' : SHIFT_LABEL[shiftFilter],
         Empleado: emp.name,
         Área: emp.area,
@@ -99,7 +102,7 @@ const ReportingPage = () => {
     XLSX.writeFile(wb, `reporte_${branchId}_${processId}.xlsx`);
   };
 
-  const branch = MOCK_BRANCHES.find(b => b.id === branchId);
+  const branch = branches.find(b => b.id === branchId);
 
   return (
     <Stack sx={{ gap: 3 }}>
@@ -122,7 +125,7 @@ const ReportingPage = () => {
           Proceso
         </Typography>
         <Stack sx={{ flexDirection: 'row', gap: 1, flexWrap: 'wrap' }}>
-          {MOCK_PROCESSES.map(p => (
+          {processes.map(p => (
             <Pills
               key={p.id}
               label={p.name}

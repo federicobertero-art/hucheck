@@ -1,12 +1,35 @@
 {
-  "plugins": {
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "enabledPlugins": {
     "humand-react@hu-ai-agent-plugin": true,
     "humand-frontend-sandbox@hu-ai-agent-plugin": true
   },
   "permissions": {
     "allow": [
-      "Skill(humand-frontend-sandbox:check-project)",
-      "Skill(humand-frontend-sandbox:remediate-project)"
+      "Skill(humand-frontend-sandbox:project-check)",
+      "Skill(humand-frontend-sandbox:project-remediate)",
+      "Bash(bun */scripts/checks/*.ts)",
+      "Bash(bun */scripts/checks/*.ts *)",
+      "Bash(bun */scripts/remediate/*.ts)",
+      "Bash(bun */scripts/remediate/*.ts *)",
+      "Bash(bun */scripts/sandbox-sync-settings.ts)",
+      "Bash(bun */scripts/sandbox-sync-settings.ts *)",
+      "Bash(bun *)",
+      "Bash(bunx *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(mkdir -p *)",
+      "Bash(cp *)",
+      "Bash(cat *)",
+      "Bash(rm -f .sandbox/remediating)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Bash(rm -rf *)"
     ]
   }
 }

@@ -14,11 +14,18 @@ import Switcher from '@material-hu/components/design-system/Switcher';
 import Title from '@material-hu/components/design-system/Title';
 
 import ProcessCard from './components/ProcessCard';
-import { MOCK_PROCESSES } from './constants';
+import { getProcessList } from './Management/store';
+import { useProcesses } from "./useProcesses";
 
 const ProcessesPage = () => {
+    const { data: processesData = [] } = useProcesses();
   const navigate = useNavigate();
   const [isManagerMode, setIsManagerMode] = useState(false);
+
+  const processes = processesData.map(process => {
+    const managed = getProcessList().find(p => p.id === process.id);
+    return managed ? { ...process, totalTasks: managed.tasks.length } : process;
+  });
 
   return (
     <Stack sx={{ p: 2, gap: 2 }}>
@@ -62,7 +69,7 @@ const ProcessesPage = () => {
           </Button>
         </Stack>
       )}
-      {MOCK_PROCESSES.length === 0 ? (
+      {processes.length === 0 ? (
         <StateCard
           slotProps={{
             title: {
@@ -78,7 +85,7 @@ const ProcessesPage = () => {
         />
       ) : (
         <Stack sx={{ gap: 1.5 }}>
-          {MOCK_PROCESSES.map(process => (
+          {processes.map(process => (
             <ProcessCard
               key={process.id}
               process={process}

@@ -1,6 +1,5 @@
-import { createContext, useContext, useState, type ReactNode } from 'react';
-
-import { MOCK_BRANCHES } from '../pages/Processes/branches';
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { useBranches } from "../pages/Processes/useBranches";
 
 interface BranchContextValue {
   branchId: string;
@@ -8,12 +7,16 @@ interface BranchContextValue {
 }
 
 const BranchContext = createContext<BranchContextValue>({
-  branchId: MOCK_BRANCHES[0].id,
+  branchId: '',
   setBranchId: () => undefined,
 });
 
 export const BranchProvider = ({ children }: { children: ReactNode }) => {
-  const [branchId, setBranchId] = useState(MOCK_BRANCHES[0].id);
+    const { data: branches = [] } = useBranches();
+  const [branchId, setBranchId] = useState('');
+  useEffect(() => {
+    if (!branchId && branches[0]) setBranchId(branches[0].id);
+  }, [branches, branchId]);
   return (
     <BranchContext.Provider value={{ branchId, setBranchId }}>
       {children}

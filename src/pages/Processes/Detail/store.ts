@@ -1,4 +1,6 @@
 import { MOCK_BRANCHES } from '../branches';
+import { getProcessList } from '../Management/store';
+
 import { MOCK_TASKS } from './constants';
 import { type Task, type TaskEntry, type TaskShift } from './types';
 
@@ -16,7 +18,7 @@ const storeKey = (
 ) => `${branchId}|${processId}|${dateStr}|${shift}`;
 
 export const getTaskTemplate = (processId: string): Task[] => {
-  const base = MOCK_TASKS[processId] ?? [];
+  const base = getProcessList().find(p => p.id === processId)?.tasks ?? [];
   if (!assigneeStore[processId]) {
     assigneeStore[processId] = Object.fromEntries(
       base.map(t => [t.id, [...t.assignedTo]]),
@@ -107,8 +109,10 @@ export const updateTaskAssignees = (
 };
 
 // For reporting: iterate all stored completions
-export const getAllCompletions = (): Record<string, Record<string, TaskEntry>> =>
-  completionStore;
+export const getAllCompletions = (): Record<
+  string,
+  Record<string, TaskEntry>
+> => completionStore;
 
 // Pre-populate mock historical data (last 7 days, all branches)
 const seedHistory = () => {
@@ -134,7 +138,8 @@ const seedHistory = () => {
             if (complete) {
               completionStore[key][task.id] = {
                 completed: true,
-                completedBy: COMPLETERS[(idx + d + branchSeed) % COMPLETERS.length],
+                completedBy:
+                  COMPLETERS[(idx + d + branchSeed) % COMPLETERS.length],
               };
             }
           });

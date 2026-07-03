@@ -21,8 +21,7 @@ import Title from '@material-hu/components/design-system/Title';
 import { useDrawerLayer } from '@material-hu/components/layers/Drawers';
 
 import { useBranch } from '../../../contexts/BranchContext';
-import { MOCK_PROCESSES } from '../constants';
-import { MOCK_EMPLOYEES, type Employee } from '../employees';
+import { type Employee } from '../employees';
 
 import {
   getShiftCompletions,
@@ -33,6 +32,8 @@ import {
   updateTaskAssignees,
 } from './store';
 import { type TaskShift } from './types';
+import { useProcesses } from "../useProcesses";
+import { useEmployees } from "../useEmployees";
 
 type AssignPickerProps = {
   initial: string[];
@@ -40,6 +41,7 @@ type AssignPickerProps = {
 };
 
 const AssignPicker = ({ initial, onChange }: AssignPickerProps) => {
+    const { data: employees = [] } = useEmployees();
   const [selected, setSelected] = useState<string[]>(initial);
   const toggle = (emp: Employee) => {
     const next = selected.includes(emp.id)
@@ -50,7 +52,7 @@ const AssignPicker = ({ initial, onChange }: AssignPickerProps) => {
   };
   return (
     <Stack sx={{ gap: 1 }}>
-      {MOCK_EMPLOYEES.map(emp => (
+      {employees.map(emp => (
         <Checkbox
           key={emp.id}
           label={`${emp.name} · ${emp.area}`}
@@ -79,6 +81,8 @@ const shiftDate = (dateStr: string, delta: number): string => {
 const CURRENT_USER = 'Federico B.';
 
 const ProcessDetail = () => {
+    const { data: employees = [] } = useEmployees();
+    const { data: processes = [] } = useProcesses();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { openDrawer, closeDrawer } = useDrawerLayer();
@@ -86,7 +90,7 @@ const ProcessDetail = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const targetTaskId = useRef<string | null>(null);
 
-  const process = MOCK_PROCESSES.find(p => p.id === id);
+  const process = processes.find(p => p.id === id);
 
   const [currentDateStr, setCurrentDateStr] = useState(todayStr);
   const [shift, setShift] = useState<TaskShift>('morning');
@@ -181,7 +185,7 @@ const ProcessDetail = () => {
 
   const getAssigneeNames = (assignedTo: string[]) =>
     assignedTo
-      .map(eid => MOCK_EMPLOYEES.find(e => e.id === eid)?.name)
+      .map(eid => employees.find(e => e.id === eid)?.name)
       .filter(Boolean)
       .join(', ');
 
