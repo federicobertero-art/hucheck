@@ -9,7 +9,7 @@ import { itemsToSeed, resourcesFromSeed, type SeedData } from './seed';
 import { type DataProvider, type Entity, type QueryOpts } from './types';
 
 const DB_NAME = 'app-data';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 const seed = seedJson as SeedData;
 const resources = resourcesFromSeed(seed);
 

@@ -19,7 +19,7 @@ Incorporar 4 pedidos del cliente sobre la base ya construida (procesos, cumplimi
 ## What this project can do (features)
 
 - [x] [001 — Gestión de tareas dentro de procesos](./features/001-tareas-en-procesos.md)
-- [ ] [002 — Configuración de horarios de turno por sucursal](./features/002-horarios-turno.md)
+- [x] [002 — Configuración de horarios de turno por sucursal](./features/002-horarios-turno.md)
 - [ ] [003 — Selector de rol y permisos](./features/003-roles-permisos.md)
 - [ ] [004 — Gestión de empleados](./features/004-gestion-empleados.md)
 

@@ -18,8 +18,10 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
+    "@mui/x-date-pickers": "^7.29.4",
     "@tanstack/react-query": "^5",
     "axios": "^0.27.2",
+    "date-fns": "^2.30.0",
     "dotenv": "^17.4.2",
     "hu-translations": "npm:@humanddev/hu-translations@latest",
     "i18next": "^21.3.1",

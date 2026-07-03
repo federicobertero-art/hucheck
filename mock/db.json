@@ -303,5 +303,37 @@
       "name": "Laura P.",
       "area": "Calidad"
     }
+  ],
+  "shiftSchedules": [
+    {
+      "id": "b1",
+      "branchId": "b1",
+      "morningStart": "08:00",
+      "morningEnd": "14:00",
+      "afternoonStart": "14:00",
+      "afternoonEnd": "20:00",
+      "nightStart": "20:00",
+      "nightEnd": "02:00"
+    },
+    {
+      "id": "b2",
+      "branchId": "b2",
+      "morningStart": "09:00",
+      "morningEnd": "15:00",
+      "afternoonStart": "15:00",
+      "afternoonEnd": "21:00",
+      "nightStart": "21:00",
+      "nightEnd": "03:00"
+    },
+    {
+      "id": "b3",
+      "branchId": "b3",
+      "morningStart": "07:30",
+      "morningEnd": "13:30",
+      "afternoonStart": "13:30",
+      "afternoonEnd": "19:30",
+      "nightStart": "19:30",
+      "nightEnd": "01:30"
+    }
   ]
 }

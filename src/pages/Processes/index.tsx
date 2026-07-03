@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   IconChartBar,
   IconClipboardList,
+  IconClock,
   IconSettings,
 } from '@material-hu/icons/tabler';
 import Stack from '@material-hu/mui/Stack';
@@ -15,10 +16,10 @@ import Title from '@material-hu/components/design-system/Title';
 
 import ProcessCard from './components/ProcessCard';
 import { getProcessList } from './Management/store';
-import { useProcesses } from "./useProcesses";
+import { useProcesses } from './useProcesses';
 
 const ProcessesPage = () => {
-    const { data: processesData = [] } = useProcesses();
+  const { data: processesData = [] } = useProcesses();
   const navigate = useNavigate();
   const [isManagerMode, setIsManagerMode] = useState(false);
 
@@ -66,6 +67,15 @@ const ProcessesPage = () => {
             sx={{ flex: 1 }}
           >
             Configurar
+          </Button>
+          <Button
+            variant="secondary"
+            size="large"
+            startIcon={<IconClock size={20} />}
+            onClick={() => navigate('/procesos/turnos')}
+            sx={{ flex: 1 }}
+          >
+            Horarios
           </Button>
         </Stack>
       )}
