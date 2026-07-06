@@ -6,15 +6,23 @@ Selector de rol (Administrador / Encargado / Empleado) en el encabezado, similar
 
 ## Validation criteria
 
-<!-- Filled in by /feature-refine -->
+- Veo un selector de rol en el encabezado con las opciones "Administrador", "Encargado" y "Empleado"; "Administrador" aparece seleccionado por defecto al entrar a la app.
+- Puedo cambiar el rol activo tocando cualquiera de las tres opciones.
+- Cuando el rol activo es "Encargado" o "Empleado", el selector de sucursal se ve deshabilitado y no puedo elegir otra sucursal; si intento tocarlo, veo una indicación de por qué está bloqueado.
+- Si vuelvo a elegir "Administrador", el selector de sucursal se habilita de nuevo y puedo cambiar de sucursal con normalidad.
 
 ## Components
 
-<!-- Filled in by /feature-refine -->
+| Section | Component | Storybook | Import path | Key prop | Value / Source |
+|---|---|---|---|---|---|
+| Selector de rol | ButtonGroup | https://hugo.humand.co/?path=/story/design-system-buttongroup--default | `@material-hu/components/design-system/ButtonGroup` | `labels`, `value`, `onChange` | `labels=['Administrador','Encargado','Empleado']`, `value` = índice del rol activo |
+| Explicación de bloqueo | Tooltip | https://hugo.humand.co/?path=/story/design-system-tooltip--default | `@material-hu/components/design-system/Tooltip` | `title` | "Solo el Administrador puede cambiar de sucursal" |
+
+Nota: el selector de sucursal existente (`DashboardLayout`) se envuelve con este `Tooltip` y pasa a un estado visualmente deshabilitado (opacidad reducida, sin clic) cuando el rol activo no es Administrador.
 
 ## Data
 
-<!-- Filled in by /feature-refine -->
+N/A — no hay backend real de roles todavía (no existe login). El rol activo es estado de sesión en el navegador, manejado por un nuevo `RoleContext` (mismo patrón que `BranchContext`), sin persistencia entre recargas — igual que el selector de sucursal.
 
 ## Pending follow-ups
 
@@ -22,7 +30,7 @@ Selector de rol (Administrador / Encargado / Empleado) en el encabezado, similar
 
 ## Commits
 
-<!-- Filled in by /feature-commit -->
+- `e1ea152` — feat(layouts/dashboardlayout): role selector with branch-switch lock
 
 ---
 
@@ -30,9 +38,13 @@ Selector de rol (Administrador / Encargado / Empleado) en el encabezado, similar
 <!-- Used by the workflow skills. Skip if you're reading to understand the feature. -->
 
 ```yaml
-status: pending
+status: done
 order: 3
 screens:
   - module: Layouts
     screen: DashboardLayout
+source_files:
+  - src/App.tsx
+  - src/contexts/RoleContext.tsx
+  - src/layouts/DashboardLayout/index.tsx
 ```

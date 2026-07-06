@@ -8,9 +8,11 @@ import {
   IconClipboardCheck,
   IconReportAnalytics,
 } from '@material-hu/icons/tabler';
+import { useTheme } from '@material-hu/mui/styles';
 import Stack from '@material-hu/mui/Stack';
 import Typography from '@material-hu/mui/Typography';
 
+import ButtonGroup from '@material-hu/components/design-system/ButtonGroup';
 import HomeHeader from '@material-hu/components/design-system/Header/Home';
 import Sidebar from '@material-hu/components/design-system/Sidebar';
 import {
@@ -18,10 +20,12 @@ import {
   SIDEBAR_WIDTH,
 } from '@material-hu/components/design-system/Sidebar/constants';
 import { type NavSectionProps } from '@material-hu/components/design-system/Sidebar/types';
+import Tooltip from '@material-hu/components/design-system/Tooltip';
 
-import { useBranch } from '../../contexts/BranchContext';
 import humandLogo from '../../assets/humand.svg';
-import { useBranches } from "../../pages/Processes/useBranches";
+import { useBranch } from '../../contexts/BranchContext';
+import { ROLES, useRole } from '../../contexts/RoleContext';
+import { useBranches } from '../../pages/Processes/useBranches';
 
 const SECTIONS: NavSectionProps[] = [
   {
@@ -57,12 +61,15 @@ const SECTIONS: NavSectionProps[] = [
 ];
 
 export const DashboardLayout = () => {
-    const { data: branches = [] } = useBranches();
+  const { data: branches = [] } = useBranches();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const { pathname } = useLocation();
   const { branchId, setBranchId } = useBranch();
+  const { role, setRole } = useRole();
+  const theme = useTheme();
 
   const sidebarWidth = isCollapsed ? SIDEBAR_COLLAPSED_WIDTH : SIDEBAR_WIDTH;
+  const isBranchLocked = role !== 'Administrador';
 
   return (
     <Stack sx={{ minHeight: '100vh' }}>
@@ -84,6 +91,7 @@ export const DashboardLayout = () => {
         sx={{
           flexDirection: 'row',
           alignItems: 'center',
+          justifyContent: 'space-between',
           gap: 1.5,
           px: 3,
           py: 1,
@@ -95,37 +103,76 @@ export const DashboardLayout = () => {
           zIndex: 99,
         }}
       >
-        <IconBuildingStore size={16} style={{ color: '#6b7280', flexShrink: 0 }} />
-        <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 600, flexShrink: 0 }}>
-          Sucursal:
-        </Typography>
-        {branches.map(branch => (
+        <Tooltip
+          title={
+            isBranchLocked
+              ? 'Solo el Administrador puede cambiar de sucursal'
+              : undefined
+          }
+          disableTooltip={!isBranchLocked}
+        >
           <Stack
-            key={branch.id}
-            onClick={() => setBranchId(branch.id)}
             sx={{
-              px: 1.5,
-              py: 0.5,
-              borderRadius: 2,
-              cursor: 'pointer',
-              bgcolor: branchId === branch.id ? 'primary.main' : 'transparent',
-              transition: 'background-color 0.15s',
-              '&:hover': {
-                bgcolor: branchId === branch.id ? 'primary.main' : 'action.hover',
-              },
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 1.5,
+              opacity: isBranchLocked ? 0.5 : 1,
+              pointerEvents: isBranchLocked ? 'none' : 'auto',
+              cursor: isBranchLocked ? 'not-allowed' : 'auto',
             }}
           >
+            <IconBuildingStore
+              size={16}
+              color={theme.palette.text.secondary}
+              style={{ flexShrink: 0 }}
+            />
             <Typography
               variant="caption"
-              sx={{
-                fontWeight: branchId === branch.id ? 700 : 400,
-                color: branchId === branch.id ? 'primary.contrastText' : 'text.primary',
-              }}
+              sx={{ color: 'text.secondary', fontWeight: 600, flexShrink: 0 }}
             >
-              {branch.name}
+              Sucursal:
             </Typography>
+            {branches.map(branch => (
+              <Stack
+                key={branch.id}
+                onClick={() => setBranchId(branch.id)}
+                sx={{
+                  px: 1.5,
+                  py: 0.5,
+                  borderRadius: 2,
+                  cursor: 'pointer',
+                  bgcolor:
+                    branchId === branch.id ? 'primary.main' : 'transparent',
+                  transition: 'background-color 0.15s',
+                  '&:hover': {
+                    bgcolor:
+                      branchId === branch.id ? 'primary.main' : 'action.hover',
+                  },
+                }}
+              >
+                <Typography
+                  variant="caption"
+                  sx={{
+                    fontWeight: branchId === branch.id ? 700 : 400,
+                    color:
+                      branchId === branch.id
+                        ? 'primary.contrastText'
+                        : 'text.primary',
+                  }}
+                >
+                  {branch.name}
+                </Typography>
+              </Stack>
+            ))}
           </Stack>
-        ))}
+        </Tooltip>
+        <ButtonGroup
+          labels={[...ROLES]}
+          value={ROLES.indexOf(role)}
+          onChange={value => {
+            if (value !== null) setRole(ROLES[value]);
+          }}
+        />
       </Stack>
       <Stack sx={{ flexDirection: 'row' }}>
         <Sidebar

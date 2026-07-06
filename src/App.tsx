@@ -12,6 +12,7 @@ import { DrawerLayerProvider } from '@material-hu/components/layers/Drawers';
 import { MenuLayerProvider } from '@material-hu/components/layers/Menus';
 
 import { BranchProvider } from './contexts/BranchContext';
+import { RoleProvider } from './contexts/RoleContext';
 import { DashboardLayout } from './layouts/DashboardLayout';
 import AuditsPage from './pages/Audits';
 import { HomePage } from './pages/Home';
@@ -37,54 +38,56 @@ const App = () => {
             <MenuLayerProvider>
               <DialogLayerProvider>
                 <DrawerLayerProvider>
-                  <BranchProvider>
-                    <BrowserRouter>
-                      <Routes>
-                        <Route element={<DashboardLayout />}>
-                          <Route
-                            path="/"
-                            element={<HomePage />}
-                          />
-                          <Route
-                            path="/procesos"
-                            element={<ProcessesPage />}
-                          />
-                          <Route
-                            path="/procesos/cumplimiento"
-                            element={<CompliancePage />}
-                          />
-                          <Route
-                            path="/procesos/cumplimiento/:id"
-                            element={<ComplianceHistoryPage />}
-                          />
-                          <Route
-                            path="/procesos/gestion"
-                            element={<ManagementPage />}
-                          />
-                          <Route
-                            path="/procesos/turnos"
-                            element={<ShiftSettingsPage />}
-                          />
-                          <Route
-                            path="/procesos/:id"
-                            element={<ProcessDetail />}
-                          />
-                          <Route
-                            path="/avisos"
-                            element={<NoticesPage />}
-                          />
-                          <Route
-                            path="/auditorias"
-                            element={<AuditsPage />}
-                          />
-                          <Route
-                            path="/reporteria"
-                            element={<ReportingPage />}
-                          />
-                        </Route>
-                      </Routes>
-                    </BrowserRouter>
-                  </BranchProvider>
+                  <RoleProvider>
+                    <BranchProvider>
+                      <BrowserRouter>
+                        <Routes>
+                          <Route element={<DashboardLayout />}>
+                            <Route
+                              path="/"
+                              element={<HomePage />}
+                            />
+                            <Route
+                              path="/procesos"
+                              element={<ProcessesPage />}
+                            />
+                            <Route
+                              path="/procesos/cumplimiento"
+                              element={<CompliancePage />}
+                            />
+                            <Route
+                              path="/procesos/cumplimiento/:id"
+                              element={<ComplianceHistoryPage />}
+                            />
+                            <Route
+                              path="/procesos/gestion"
+                              element={<ManagementPage />}
+                            />
+                            <Route
+                              path="/procesos/turnos"
+                              element={<ShiftSettingsPage />}
+                            />
+                            <Route
+                              path="/procesos/:id"
+                              element={<ProcessDetail />}
+                            />
+                            <Route
+                              path="/avisos"
+                              element={<NoticesPage />}
+                            />
+                            <Route
+                              path="/auditorias"
+                              element={<AuditsPage />}
+                            />
+                            <Route
+                              path="/reporteria"
+                              element={<ReportingPage />}
+                            />
+                          </Route>
+                        </Routes>
+                      </BrowserRouter>
+                    </BranchProvider>
+                  </RoleProvider>
                 </DrawerLayerProvider>
               </DialogLayerProvider>
             </MenuLayerProvider>
