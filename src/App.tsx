@@ -15,6 +15,7 @@ import { BranchProvider } from './contexts/BranchContext';
 import { RoleProvider } from './contexts/RoleContext';
 import { DashboardLayout } from './layouts/DashboardLayout';
 import AuditsPage from './pages/Audits';
+import EmployeesPage from './pages/Employees';
 import { HomePage } from './pages/Home';
 import NoticesPage from './pages/Notices';
 import ProcessesPage from './pages/Processes';
@@ -70,6 +71,10 @@ const App = () => {
                             <Route
                               path="/procesos/:id"
                               element={<ProcessDetail />}
+                            />
+                            <Route
+                              path="/empleados"
+                              element={<EmployeesPage />}
                             />
                             <Route
                               path="/avisos"

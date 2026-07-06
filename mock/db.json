@@ -276,32 +276,38 @@
     {
       "id": "e1",
       "name": "Federico B.",
-      "area": "Operaciones"
+      "area": "Operaciones",
+      "branchId": "b1"
     },
     {
       "id": "e2",
       "name": "Ana G.",
-      "area": "Calidad"
+      "area": "Calidad",
+      "branchId": "b1"
     },
     {
       "id": "e3",
       "name": "Marcos L.",
-      "area": "Logística"
+      "area": "Logística",
+      "branchId": "b2"
     },
     {
       "id": "e4",
       "name": "Sofía R.",
-      "area": "Higiene"
+      "area": "Higiene",
+      "branchId": "b2"
     },
     {
       "id": "e5",
       "name": "Diego M.",
-      "area": "Operaciones"
+      "area": "Operaciones",
+      "branchId": "b3"
     },
     {
       "id": "e6",
       "name": "Laura P.",
-      "area": "Calidad"
+      "area": "Calidad",
+      "branchId": "b3"
     }
   ],
   "shiftSchedules": [

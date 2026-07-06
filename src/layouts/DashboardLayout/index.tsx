@@ -7,9 +7,10 @@ import {
   IconChecklist,
   IconClipboardCheck,
   IconReportAnalytics,
+  IconUsers,
 } from '@material-hu/icons/tabler';
-import { useTheme } from '@material-hu/mui/styles';
 import Stack from '@material-hu/mui/Stack';
+import { useTheme } from '@material-hu/mui/styles';
 import Typography from '@material-hu/mui/Typography';
 
 import ButtonGroup from '@material-hu/components/design-system/ButtonGroup';
@@ -27,7 +28,7 @@ import { useBranch } from '../../contexts/BranchContext';
 import { ROLES, useRole } from '../../contexts/RoleContext';
 import { useBranches } from '../../pages/Processes/useBranches';
 
-const SECTIONS: NavSectionProps[] = [
+const getSections = (isAdmin: boolean): NavSectionProps[] => [
   {
     key: 'main',
     title: 'Principal',
@@ -56,6 +57,16 @@ const SECTIONS: NavSectionProps[] = [
         path: '/reporteria',
         icon: <IconReportAnalytics />,
       },
+      ...(isAdmin
+        ? [
+            {
+              key: 'employees',
+              title: 'Empleados',
+              path: '/empleados',
+              icon: <IconUsers />,
+            },
+          ]
+        : []),
     ],
   },
 ];
@@ -178,7 +189,7 @@ export const DashboardLayout = () => {
         <Sidebar
           isCollapsed={isCollapsed}
           pathname={pathname}
-          sections={SECTIONS}
+          sections={getSections(role === 'Administrador')}
           openMenu={() => setIsCollapsed(false)}
           sx={{
             position: 'sticky',

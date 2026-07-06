@@ -21,7 +21,7 @@ Incorporar 4 pedidos del cliente sobre la base ya construida (procesos, cumplimi
 - [x] [001 — Gestión de tareas dentro de procesos](./features/001-tareas-en-procesos.md)
 - [x] [002 — Configuración de horarios de turno por sucursal](./features/002-horarios-turno.md)
 - [x] [003 — Selector de rol y permisos](./features/003-roles-permisos.md)
-- [ ] [004 — Gestión de empleados](./features/004-gestion-empleados.md)
+- [x] [004 — Gestión de empleados](./features/004-gestion-empleados.md)
 
 ## Where these live (screens)
 
