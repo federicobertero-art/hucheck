@@ -27,7 +27,7 @@ interface AuditItem {
   observation?: string;
 }
 
-interface Audit {
+export interface Audit {
   id: string;
   date: string;
   branch: string;

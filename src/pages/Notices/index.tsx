@@ -18,7 +18,7 @@ import { useNotices } from "./useNotices";
 
 type NoticePriority = 'urgent' | 'info' | 'reminder';
 
-interface Notice {
+export interface Notice {
   id: string;
   title: string;
   content: string;
